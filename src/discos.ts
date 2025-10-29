@@ -12,19 +12,18 @@ const router = Router();
 
 const validateLDData = (data: any): string | null => {
 
-    if (!data) return "No se ha proporcionado ningun dato en el body"
+    if (!data) return "No se ha proporcionado ningún dato en el body";
 
-    const { id, filmName, rotationType, region, lengthMinutes, videoFormat } = data;
+    const updates: Partial<LD> = data;
 
-    if (typeof filmName !== "string") return "El nombre tiene que ser una cadena de caracteres";
-    if (typeof region !== "string") return "La region tiene que ser una cadena de caracteres";
-    if (typeof lengthMinutes !== "number") return "La longitud tiene que ser un numero entero";
-    if (rotationType !== "CAV" && rotationType !== "CLV") return "El tipo de rotacion ha de ser CAV o CLV";
-    if (videoFormat !== "NTSC" && videoFormat !== "PAL") return "El formato tiene que ser NTSC o PAL";
+    if ("filmName" in updates && typeof updates.filmName !== "string") return "El nombre tiene que ser una cadena de caracteres";
+    if ("region" in updates && typeof updates.region !== "string") return "La región tiene que ser una cadena de caracteres";
+    if ("lengthMinutes" in updates && typeof updates.lengthMinutes !== "number") return "La longitud tiene que ser un número entero";
+    if ("rotationType" in updates && updates.rotationType !== "CAV" && updates.rotationType !== "CLV") return "El tipo de rotación ha de ser CAV o CLV";
+    if ("videoFormat" in updates && updates.videoFormat !== "NTSC" && updates.videoFormat !== "PAL") return "El formato tiene que ser NTSC o PAL";
 
     return null;
-
-}
+};
 
 router.get("/", (req, res) => res.json(discos))
 

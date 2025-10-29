@@ -48,7 +48,7 @@ const testApi = async () => {
     //Cuarta prueba del put
     console.log("Discos tras actualizar el primer disco");
     const idToPut = 1;
-    await axios.put(endpoint + `/${idToPut}`, { filmName: "DiscoActualizado", rotationType: "CAV", region: "Japan", lengthMinutes: 137, videoFormat: "NTSC" })
+    await axios.put(endpoint + `/${idToPut}`, { filmName: "DiscoActualizado" })
     const discosActualizados = (await axios.get<LD[]>(endpoint)).data;
     console.log(discosActualizados)
 }
